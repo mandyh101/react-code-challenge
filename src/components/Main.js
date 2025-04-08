@@ -11,7 +11,7 @@ function Main() {
     <>
       <Router>
           <Routes>
-            <Route path="/" element={<TicketBoard tickets={ticketsData} />} />
+            <Route path="/" element={<TicketBoard />} />
             <Route path="/ticket/:id" element={<TicketDetails />} />
           </Routes>
       </Router>

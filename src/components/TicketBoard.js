@@ -1,20 +1,14 @@
-import React from "react";
+import React , {useContext} from "react";
 import TicketCard from "./TicketCard";
+import { TicketContext } from "../context/TicketContext.js";
 
-const TicketBoard = ({tickets}) => {
+const TicketBoard = () => {
   const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
-  const ticket = {
-    id: 2,
-    title: "Payment Failure",
-    description: "Payment is not going through for a specific order.",
-    assignedAgent: "Bob",
-    dueDate: "2024-12-12",
-    status: "In Progress",
-  };
-
+  const  {tickets} = useContext(TicketContext);
   const sortedTickets = [...tickets].sort(
     (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
   );
+
 
   return (
     <div className="centered-container" data-testid="ticket-board">
