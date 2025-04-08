@@ -1,6 +1,7 @@
 import React , {useContext, useEffect} from "react";
 import TicketCard from "./TicketCard";
 import { TicketContext } from "../context/TicketContext.js";
+import DropdownFilter from "./UI/DropdownFilter.js";
 
 const TicketBoard = () => {
 
@@ -31,27 +32,29 @@ const TicketBoard = () => {
   const handleStatusChange = (EventTarget) => {
     setStatusFilter(EventTarget.value);
   }
+
+  const handleAgentChange = (EventTarget) => {
+    setAgentFilter(EventTarget.value);
+  }
 // TODO extract filter logic to a custom hook and filter UI into a separate component
   return (
     <div className="centered-container" data-testid="ticket-board">
       <h2 className="mb-10 mt-10">Ticket Board</h2>
       <div className="layout-row align-items-center">
-        <label className="ml-20">Filter by Status: </label>
-        <select className="ml-10" data-testId="filter-status" value={statusFilter} onChange={(e) => handleStatusChange(e.target)}>
-          {statusOptions.map((status, index) => (
-            <option key={index} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
-        <label className="ml-20">Filter by Agent: </label>
-        <select className="ml-10" data-testid="filter-agent" value={agentFilter} onChange={(e) => setAgentFilter(e.target.value)}>
-          {getUniqueAgentOptions(filteredTickets).map((agent, index) => (
-            <option key={index} value={agent}>
-              {agent}
-            </option>
-          ))}
-        </select>
+        <DropdownFilter
+          filterName={"Status"}
+          dataTestId="filter-status"
+          options={statusOptions}
+          selected={statusFilter}
+          onChangeFn={handleStatusChange}
+        />
+        <DropdownFilter 
+          filterName={"Agent"}
+          dataTestId="filter-agent"
+          options={getUniqueAgentOptions(filteredTickets)}
+          selected={agentFilter}
+          onChangeFn={handleAgentChange}
+        />
       </div>
 {/* //TODO check ascending order of tickets */}
       <div className="ticket-board mt-20" data-testid="tickets">
