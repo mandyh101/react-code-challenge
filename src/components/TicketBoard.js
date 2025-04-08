@@ -31,7 +31,7 @@ const TicketBoard = () => {
   const handleStatusChange = (EventTarget) => {
     setStatusFilter(EventTarget.value);
   }
-
+// TODO extract filter logic to a custom hook and filter UI into a separate component
   return (
     <div className="centered-container" data-testid="ticket-board">
       <h2 className="mb-10 mt-10">Ticket Board</h2>
