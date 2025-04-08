@@ -3,11 +3,17 @@ import TicketCard from "./TicketCard";
 import { TicketContext } from "../context/TicketContext.js";
 
 const TicketBoard = () => {
+  
   const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
+
+  const statusOptions = ["All", "Open", "In Progress", "Resolved"];
+  
   const  {tickets} = useContext(TicketContext);
+
   const sortedTickets = [...tickets].sort(
     (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
   );
+
 
 
   return (
@@ -16,10 +22,11 @@ const TicketBoard = () => {
       <div className="layout-row align-items-center">
         <label className="ml-20">Filter by Status: </label>
         <select className="ml-10" data-testId="filter-status" value={"Open"}>
-          <option value="All">All</option>
-          <option value="Open">Open</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Resolved">Resolved</option>
+          {statusOptions.map((status, index) => (
+            <option key={index} value={status}>
+              {status}
+            </option>
+          ))}
         </select>
         <label className="ml-20">Filter by Agent: </label>
         <select className="ml-10" data-testid="filter-agent" value={"Agent1"}>
