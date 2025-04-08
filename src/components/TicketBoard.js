@@ -5,9 +5,8 @@ import { TicketContext } from "../context/TicketContext.js";
 const TicketBoard = () => {
 
   const [statusFilter, setStatusFilter] = React.useState("All");
+  const [agentFilter, setAgentFilter] = React.useState("All");
   
-  // const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
-
   const statusOptions = ["All", "Open", "In Progress", "Resolved"];
 
   
@@ -43,7 +42,7 @@ const getUniqueAgentOptions = (tickets) => {
           ))}
         </select>
         <label className="ml-20">Filter by Agent: </label>
-        <select className="ml-10" data-testid="filter-agent" value={"Agent1"}>
+        <select className="ml-10" data-testid="filter-agent" value={agentFilter}>
           {getUniqueAgentOptions(filteredTickets).map((agent, index) => (
             <option key={index} value={agent}>
               {agent}
