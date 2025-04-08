@@ -1,14 +1,22 @@
-import React , { useContext } from "react";
+import React , { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { TicketContext } from "../context/TicketContext.js";
+import DropdownFilter from "./UI/DropdownFilter.js";
 
 const TicketDetails = () => {
+  const  {tickets} = useContext(TicketContext);
   const navigate = useNavigate();
   // TODO I would like to look at moving this logic to get the specific ticket using a custom hook or inside the TicketContext
   const { id } = useParams();
-  const  {tickets} = useContext(TicketContext);
   const ticketId = parseInt(id, 10);
   const ticket = tickets.find(t => t.id === ticketId);
+  const [statusFilter, setStatusFilter] = useState(ticket.status);
+
+  const statusOptions = ["All", "Open", "In Progress", "Resolved"];
+
+  const handleStatusChange = (EventTarget) => {
+    // TODO
+  }
 
   const handleBackButtonClick = () => {
     navigate("/");
@@ -37,12 +45,13 @@ const TicketDetails = () => {
         </p>
 
         <div>
-          <label htmlFor="status">Change Status: </label>
-          <select data-testid="change-status" id="status" value={"Open"}>
-            <option value="Open">Open</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
-          </select>
+          <DropdownFilter
+            filterLabel={"Change status"}
+            dataTestId="chnage-status"
+            options={statusOptions}
+            selected={statusFilter}
+            onChangeFn={handleStatusChange}
+          />
         </div>
         <div className="mt-5 layout-row justify-content-center">
           <button data-testid="save-changes-btn">Save Changes</button>
