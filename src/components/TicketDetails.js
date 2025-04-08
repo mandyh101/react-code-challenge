@@ -1,13 +1,18 @@
 import React , { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { TicketContext } from "../context/TicketContext.js";
 
 const TicketDetails = () => {
+  const navigate = useNavigate();
   // TODO I would like to look at moving this logic to get the specific ticket using a custom hook or inside the TicketContext
   const { id } = useParams();
   const  {tickets} = useContext(TicketContext);
   const ticketId = parseInt(id, 10);
   const ticket = tickets.find(t => t.id === ticketId);
+
+  const handleBackButtonClick = () => {
+    navigate("/");
+  }
 
   if (!ticket) {
     return <div>Ticket not found</div>;
@@ -41,7 +46,7 @@ const TicketDetails = () => {
         </div>
         <div className="mt-5 layout-row justify-content-center">
           <button data-testid="save-changes-btn">Save Changes</button>
-          <button data-testid="back-to-board-btn">Back to Ticket Board</button>
+          <button data-testid="back-to-board-btn" onClick={handleBackButtonClick}>Back to Ticket Board</button>
         </div>
       </div>
     </div>
