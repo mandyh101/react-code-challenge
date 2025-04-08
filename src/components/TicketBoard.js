@@ -12,6 +12,10 @@ const TicketBoard = ({tickets}) => {
     status: "In Progress",
   };
 
+  const sortedTickets = [...tickets].sort(
+    (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+  );
+
   return (
     <div className="centered-container" data-testid="ticket-board">
       <h2 className="mb-10 mt-10">Ticket Board</h2>
@@ -35,10 +39,9 @@ const TicketBoard = ({tickets}) => {
       </div>
 {/* //TODO check ascending order of tickets */}
       <div className="ticket-board mt-20" data-testid="tickets">
-        {/* <p data-testid="no-tickets-found">No tickets found.</p> */}
-        {tickets.map((ticket) => (
+        {sortedTickets ? sortedTickets.map((ticket) => (
           <TicketCard key={ticket.id} ticket={ticket} />
-        ))}
+        )) : <p data-testid="no-tickets-found">No tickets found.</p>}
       </div>
     </div>
   );
