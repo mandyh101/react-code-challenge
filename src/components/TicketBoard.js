@@ -6,9 +6,11 @@ const TicketBoard = () => {
 
   const [statusFilter, setStatusFilter] = React.useState("All");
   
-  const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
+  // const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
 
   const statusOptions = ["All", "Open", "In Progress", "Resolved"];
+
+  const agentOptions = 
   
   //get the original data first
   const  {tickets} = useContext(TicketContext);
@@ -18,6 +20,11 @@ const TicketBoard = () => {
   const sortedTickets = [...filteredTickets].sort(
     (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
   );
+
+  //filtering by agents
+  // first get the unique agents from the tickets data to populate the dropdown (mayeb create a set??)
+  // add agentFilter state so we can track a selected agent
+  // add an additional filter to the tickets array to filter by agent
 
   const handleStatusChange = (EventTarget) => {
     setStatusFilter(EventTarget.value);
