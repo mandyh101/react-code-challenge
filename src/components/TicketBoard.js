@@ -9,11 +9,14 @@ const TicketBoard = () => {
   
   const statusOptions = ["All", "Open", "In Progress", "Resolved"];
 
+  const matchesAgentFilter = (ticket) => 
+    agentFilter === "All" || ticket.assignedAgent === agentFilter;
+
   
   //get the original data first
   const  {tickets} = useContext(TicketContext);
   // then filter it
-  const filteredTickets = tickets.filter((ticket => statusFilter === "All" || ticket.status === statusFilter));
+  const filteredTickets = tickets.filter((ticket => (statusFilter === "All" || ticket.status === statusFilter) && matchesAgentFilter(ticket)));
   // then sort it to get the final tickets array for rendering
   const sortedTickets = [...filteredTickets].sort(
     (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
@@ -42,7 +45,7 @@ const getUniqueAgentOptions = (tickets) => {
           ))}
         </select>
         <label className="ml-20">Filter by Agent: </label>
-        <select className="ml-10" data-testid="filter-agent" value={agentFilter}>
+        <select className="ml-10" data-testid="filter-agent" value={agentFilter} onChange={(e) => setAgentFilter(e.target.value)}>
           {getUniqueAgentOptions(filteredTickets).map((agent, index) => (
             <option key={index} value={agent}>
               {agent}
