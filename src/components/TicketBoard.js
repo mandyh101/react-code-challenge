@@ -4,29 +4,29 @@ import { TicketContext } from "../context/TicketContext.js";
 
 const TicketBoard = () => {
 
+  const  {tickets} = useContext(TicketContext);
   const [statusFilter, setStatusFilter] = React.useState("All");
   const [agentFilter, setAgentFilter] = React.useState("All");
   
   const statusOptions = ["All", "Open", "In Progress", "Resolved"];
+  //getUniqueAgentOptions is a function that updtes the list of agent options in the filter agent depending on the agents related to the filtered tickets.
+  const getUniqueAgentOptions = (tickets) => {
+    const uniqueAgentSet = new Set(tickets.map(ticket =>ticket.assignedAgent));
+    return ["All", ...uniqueAgentSet]; //spreads the set into an array and adds "All" as the first element
+  }
 
   const matchesAgentFilter = (ticket) => 
     agentFilter === "All" || ticket.assignedAgent === agentFilter;
-
-  
+  const matchesStatusFilter = (ticket) =>
+    statusFilter === "All" || ticket.status === statusFilter;
   //get the original data first
-  const  {tickets} = useContext(TicketContext);
   // then filter it
-  const filteredTickets = tickets.filter((ticket => (statusFilter === "All" || ticket.status === statusFilter) && matchesAgentFilter(ticket)));
+  const filteredTickets = tickets.filter((ticket => matchesStatusFilter(ticket) && matchesAgentFilter(ticket)));
   // then sort it to get the final tickets array for rendering
   const sortedTickets = [...filteredTickets].sort(
     (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
   );
   
-//getUniqueAgentOptions is a function that updtes the list of agent options in the filter agent depending on the agents related to the filtered tickets.
-const getUniqueAgentOptions = (tickets) => {
-  const uniqueAgentSet = new Set(tickets.map(ticket =>ticket.assignedAgent));
-  return ["All", ...uniqueAgentSet]; //spreads the set into an array and adds "All" as the first element
-}
 
   const handleStatusChange = (EventTarget) => {
     setStatusFilter(EventTarget.value);
