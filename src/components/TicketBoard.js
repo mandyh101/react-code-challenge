@@ -1,7 +1,7 @@
 import React from "react";
 import TicketCard from "./TicketCard";
 
-const TicketBoard = () => {
+const TicketBoard = ({tickets}) => {
   const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
   const ticket = {
     id: 2,
@@ -33,10 +33,12 @@ const TicketBoard = () => {
           ))}
         </select>
       </div>
-
+{/* //TODO check ascending order of tickets */}
       <div className="ticket-board mt-20" data-testid="tickets">
         {/* <p data-testid="no-tickets-found">No tickets found.</p> */}
-        <TicketCard key={ticket.id} ticket={ticket} />
+        {tickets.map((ticket) => (
+          <TicketCard key={ticket.id} ticket={ticket} />
+        ))}
       </div>
     </div>
   );
