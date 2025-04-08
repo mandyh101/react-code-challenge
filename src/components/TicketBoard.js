@@ -3,6 +3,8 @@ import TicketCard from "./TicketCard";
 import { TicketContext } from "../context/TicketContext.js";
 
 const TicketBoard = () => {
+
+  const [status, setStatus] = React.useState("All");
   
   const uniqueAgents = ["Agent1", "Agent2", "Agent3"];
 
