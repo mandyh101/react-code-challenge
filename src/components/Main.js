@@ -13,8 +13,6 @@ function Main() {
           <Routes>
             <Route path="/" element={<TicketBoard tickets={ticketsData} />} />
             <Route path="/ticket/:id" element={<TicketDetails />} />
-            {/* <TicketBoard /> */}
-            {/* <TicketDetails /> */}
           </Routes>
       </Router>
     </>
