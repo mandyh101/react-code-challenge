@@ -10,7 +10,6 @@ const TicketBoard = () => {
 
   const statusOptions = ["All", "Open", "In Progress", "Resolved"];
 
-  const agentOptions = 
   
   //get the original data first
   const  {tickets} = useContext(TicketContext);
@@ -20,9 +19,12 @@ const TicketBoard = () => {
   const sortedTickets = [...filteredTickets].sort(
     (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
   );
-
+  
   //filtering by agents
   // first get the unique agents from the tickets data to populate the dropdown (mayeb create a set??)
+  //TODO use filteredTickets to only get agent names that are in the filtered tickets - so we might need a useEffect here to update everytime the tickets change...
+  const uniqueAgentSet = new Set(tickets.map(ticket =>ticket.assignedAgent));
+  const uniqueAgentOptions = ["All", ...uniqueAgentSet];
   // add agentFilter state so we can track a selected agent
   // add an additional filter to the tickets array to filter by agent
 
@@ -45,7 +47,7 @@ const TicketBoard = () => {
         <label className="ml-20">Filter by Agent: </label>
         <select className="ml-10" data-testid="filter-agent" value={"Agent1"}>
           <option value="All">All</option>
-          {uniqueAgents.map((agent, index) => (
+          {uniqueAgentOptions.map((agent, index) => (
             <option key={index} value={agent}>
               {agent}
             </option>
