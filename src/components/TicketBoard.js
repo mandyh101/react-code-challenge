@@ -51,7 +51,7 @@ const TicketBoard = () => {
         <DropdownFilter 
           filterName={"Agent"}
           dataTestId="filter-agent"
-          options={getUniqueAgentOptions(filteredTickets)}
+          options={getUniqueAgentOptions(tickets)}
           selected={agentFilter}
           onChangeFn={handleAgentChange}
         />
