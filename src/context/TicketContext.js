@@ -4,7 +4,7 @@ import ticketsData from "../tickets.json";
 export const TicketContext = createContext();
 
 export const TicketProvider = ({ children }) => {
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState(ticketsData);
 
   const updateTicketStatus = (ticketId, newStatus) => {};
 
