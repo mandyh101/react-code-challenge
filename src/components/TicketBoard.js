@@ -41,21 +41,25 @@ const TicketBoard = () => {
     <div className="centered-container" data-testid="ticket-board">
       <h2 className="mb-10 mt-10">Ticket Board</h2>
       {/* TODO add a gap of 20px in the css */}
-      <div className="layout-row align-items-center">
-        <DropdownFilter
-           filterLabel={"Filter by status:"}
-          dataTestId="filter-status"
-          options={statusOptions}
-          selected={statusFilter}
-          onChangeFn={handleStatusChange}
-        />
-        <DropdownFilter 
-          filterLabel={"Filter by status:"}
-          dataTestId="filter-agent"
-          options={getUniqueAgentOptions(tickets)}
-          selected={agentFilter}
-          onChangeFn={handleAgentChange}
-        />
+      <div className="board-filters layout-row align-items-center">
+        <div>
+          <DropdownFilter
+            filterLabel={"Filter by status:"}
+            dataTestId="filter-status"
+            options={statusOptions}
+            selected={statusFilter}
+            onChangeFn={handleStatusChange}
+          />
+        </div>
+        <div>
+          <DropdownFilter
+            filterLabel={"Filter by status:"}
+            dataTestId="filter-agent"
+            options={getUniqueAgentOptions(tickets)}
+            selected={agentFilter}
+            onChangeFn={handleAgentChange}
+          />
+        </div>
       </div>
 {/* //TODO check ascending order of tickets */}
       <div className="ticket-board mt-20" data-testid="tickets">

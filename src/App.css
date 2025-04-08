@@ -14,6 +14,11 @@
   justify-content: center;
 }
 
+.board-filters{
+  display: flex;
+  gap: 20px;
+}
+
 /* Ticket card styling */
 .ticket-card {
   border: 1px solid #ccc;
