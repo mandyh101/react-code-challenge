@@ -40,16 +40,17 @@ const TicketBoard = () => {
   return (
     <div className="centered-container" data-testid="ticket-board">
       <h2 className="mb-10 mt-10">Ticket Board</h2>
+      {/* TODO add a gap of 20px in the css */}
       <div className="layout-row align-items-center">
         <DropdownFilter
-          filterName={"Status"}
+           filterLabel={"Filter by status:"}
           dataTestId="filter-status"
           options={statusOptions}
           selected={statusFilter}
           onChangeFn={handleStatusChange}
         />
         <DropdownFilter 
-          filterName={"Agent"}
+          filterLabel={"Filter by status:"}
           dataTestId="filter-agent"
           options={getUniqueAgentOptions(tickets)}
           selected={agentFilter}
