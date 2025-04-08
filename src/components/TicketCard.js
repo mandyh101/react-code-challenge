@@ -12,7 +12,7 @@ const TicketCard = ({ ticket }) => {
         <strong>Due Date:</strong> {ticket.dueDate}
       </p>
       <p>{ticket.status}</p>
-      <Link to="/">View Details</Link>
+      <Link to={`ticket/${ticket.id}`}>View Details</Link>
     </div>
   );
 };
