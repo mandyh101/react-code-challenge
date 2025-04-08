@@ -1,0 +1,40 @@
+/* Centering the content */
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Flex wrapper for ticket cards */
+.ticket-board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Ticket card styling */
+.ticket-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  text-align: center;
+}
+
+.ticket-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.ticket-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.ticket-card .status {
+  font-weight: bold;
+}
