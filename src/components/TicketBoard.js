@@ -29,12 +29,12 @@ const TicketBoard = () => {
   );
   
 
-  const handleStatusChange = (EventTarget) => {
-    setStatusFilter(EventTarget.value);
+  const handleStatusChange = (event) => {
+    setStatusFilter(event.target.value);
   }
 
-  const handleAgentChange = (EventTarget) => {
-    setAgentFilter(EventTarget.value);
+  const handleAgentChange = (event) => {
+    setAgentFilter(event.target.value);
   }
 // TODO extract filter logic to a custom hook and filter UI into a separate component
   return (
