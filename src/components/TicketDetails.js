@@ -4,7 +4,7 @@ import { TicketContext } from "../context/TicketContext.js";
 import DropdownFilter from "./UI/DropdownFilter.js";
 
 const TicketDetails = () => {
-  const  {tickets} = useContext(TicketContext);
+  const  {tickets, updateTicketStatus} = useContext(TicketContext);
   const navigate = useNavigate();
   // TODO I would like to look at moving this logic to get the specific ticket using a custom hook or inside the TicketContext
   const { id } = useParams();
@@ -14,8 +14,9 @@ const TicketDetails = () => {
 
   const statusOptions = ["All", "Open", "In Progress", "Resolved"];
 
-  const handleStatusChange = (EventTarget) => {
-    // TODO
+  const handleSaveButtonClick = () => {
+    updateTicketStatus(ticketId, statusFilter);
+    alert("Ticket status has been updated successfully!");
   }
 
   const handleBackButtonClick = () => {
@@ -47,14 +48,14 @@ const TicketDetails = () => {
         <div>
           <DropdownFilter
             filterLabel={"Change status"}
-            dataTestId="chnage-status"
+            dataTestId="change-status"
             options={statusOptions}
             selected={statusFilter}
-            onChangeFn={handleStatusChange}
+            onChangeFn={({target: {value}}) => {setStatusFilter(value)}}
           />
         </div>
         <div className="mt-5 layout-row justify-content-center">
-          <button data-testid="save-changes-btn">Save Changes</button>
+          <button data-testid="save-changes-btn" onClick={() => handleSaveButtonClick()}>Save Changes</button>
           <button data-testid="back-to-board-btn" onClick={handleBackButtonClick}>Back to Ticket Board</button>
         </div>
       </div>
