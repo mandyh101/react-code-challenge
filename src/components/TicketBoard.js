@@ -63,7 +63,7 @@ const TicketBoard = () => {
       </div>
 {/* //TODO check ascending order of tickets */}
       <div className="ticket-board mt-20" data-testid="tickets">
-        {sortedTickets ? sortedTickets.map((ticket) => (
+        {sortedTickets.length > 0 ? sortedTickets.map((ticket) => (
           <TicketCard key={ticket.id} ticket={ticket} />
         )) : <p data-testid="no-tickets-found">No tickets found.</p>}
       </div>
